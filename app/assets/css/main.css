@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: 'Public Sans', sans-serif;
+
+  --color-green-50: #EFFDF5;
+  --color-green-100: #D9FBE8;
+  --color-green-200: #B3F5D1;
+  --color-green-300: #75EDAE;
+  --color-green-400: #00DC82;
+  --color-green-500: #00C16A;
+  --color-green-600: #00A155;
+  --color-green-700: #007F45;
+  --color-green-800: #016538;
+  --color-green-900: #0A5331;
+  --color-green-950: #052E16;
+}
+
+/* Unovis-Charts – Achsen & Tooltip an Hell/Dunkel anpassen */
+:root {
+  --vis-axis-tick-label-color: rgb(100 116 139);
+  --vis-axis-tick-label-font-size: 11px;
+  --vis-axis-grid-color: rgb(148 163 184 / 0.25);
+  --vis-axis-domain-color: transparent;
+  --vis-tooltip-background-color: #ffffff;
+  --vis-tooltip-text-color: #0f172a;
+  --vis-tooltip-border-color: rgb(0 0 0 / 0.08);
+}
+.dark {
+  --vis-axis-tick-label-color: rgb(148 163 184);
+  --vis-axis-grid-color: rgb(255 255 255 / 0.08);
+  --vis-tooltip-background-color: #1e293b;
+  --vis-tooltip-text-color: #f1f5f9;
+  --vis-tooltip-border-color: rgb(255 255 255 / 0.12);
+}
+
+/* Sanfte Seitenübergänge */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.page-leave-to {
+  opacity: 0;
+}
+
+/* Einheitliche Tabellenziffern für Beträge */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+   Liquid Glass – lebendiger Hintergrund + mattierte Glasflächen (iOS-Stil)
+   ============================================================================ */
+body {
+  background:
+    radial-gradient(1100px 620px at 8% -8%, rgba(0, 193, 106, 0.20), transparent 60%),
+    radial-gradient(1000px 560px at 108% 6%, rgba(56, 132, 255, 0.18), transparent 55%),
+    radial-gradient(900px 640px at 50% 118%, rgba(139, 92, 246, 0.16), transparent 55%),
+    var(--ui-bg);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.dark body {
+  background:
+    radial-gradient(1100px 620px at 8% -8%, rgba(0, 193, 106, 0.16), transparent 60%),
+    radial-gradient(1000px 560px at 108% 6%, rgba(56, 132, 255, 0.14), transparent 55%),
+    radial-gradient(900px 640px at 50% 118%, rgba(139, 92, 246, 0.13), transparent 55%),
+    var(--ui-bg);
+  background-attachment: fixed;
+}
+
+/* Starke Glasfläche: Karten, Modals, Sidebar, Popover */
+.glass {
+  background-color: rgba(255, 255, 255, 0.62) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow:
+    0 8px 32px rgba(17, 24, 39, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+}
+
+.dark .glass {
+  background-color: rgba(24, 24, 27, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Dezente Glasfläche: Eingabefelder, Tab-Leisten */
+.glass-soft {
+  background-color: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+
+.dark .glass-soft {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Reduzierte Transparenz, wenn der Nutzer es so wünscht */
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .glass-soft {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: var(--ui-bg-elevated) !important;
+  }
+}
+
+/* ============================================================================
+   Druck – nur das Abrechnungs-Dokument zeigen
+   ============================================================================ */
+@media print {
+  body {
+    background: #fff !important;
+  }
+
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .print-sheet {
+    background: #fff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: #000 !important;
+  }
+}

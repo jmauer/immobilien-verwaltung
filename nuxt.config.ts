@@ -23,6 +23,14 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Nur das tatsächlich genutzte Icon-Set serverseitig bündeln. Sonst würde
+  // @nuxt/icon das riesige simple-icons-Set mitbündeln und den Build (OOM) killen.
+  icon: {
+    serverBundle: {
+      collections: ['lucide']
+    }
+  },
+
   compatibilityDate: '2025-01-15',
 
   eslint: {
